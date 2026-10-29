@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#090d14">
+    <title>AuthGuard | Security Workbench</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="#" aria-label="AuthGuard home">
+            <span class="brand-icon">A</span>
+            <span>AuthGuard</span>
+        </a>
+        <span class="status"><span class="dot"></span> LOCAL SECURITY LAB</span>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <p class="eyebrow">CYBERSECURITY WORKBENCH / V1.0</p>
+            <h1>Make weak passwords<br><span>history.</span></h1>
+            <p class="subtitle">
+                Audit password policies, simulate login defenses, explore
+                security events, and generate a findings report.
+            </p>
+            <div class="notice">
+                <strong>Privacy first:</strong> Use fictional test passwords only.
+                This educational demo processes the password in your browser.
+            </div>
+        </section>
+
+        <section class="dashboard">
+            <article class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">01 / PASSWORD AUDIT</p>
+                        <h2>Inspect a password</h2>
+                    </div>
+                    <span class="number">01</span>
+                </div>
+
+                <form id="passwordForm">
+                    <label for="passwordInput">Fictional test password</label>
+                    <div class="input-row">
+                        <input
+                            id="passwordInput"
+                            type="password"
+                            placeholder="Enter a test password"
+                            autocomplete="off"
+                            required
+                        >
+                        <button class="secondary-btn" id="togglePassword" type="button">
+                            Show
+                        </button>
+                    </div>
+                    <button class="primary-btn full-btn" type="submit">
+                        Run security audit →
+                    </button>
+                </form>
+
+                <div id="auditResult" class="result" aria-live="polite">
+                    <div class="empty-state">
+                        <span class="empty-icon">⌁</span>
+                        <p>Your findings will appear here.</p>
+                        <small>Enter a fictional password to begin.</small>
+                    </div>
+                </div>
+            </article>
+
+            <article class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">02 / LOGIN DEFENSE</p>
+                        <h2>Lockout simulator</h2>
+                    </div>
+                    <span class="number">02</span>
+                </div>
+
+                <p class="panel-description">
+                    Observe how a simulated account responds to repeated
+                    failed login attempts.
+                </p>
+
+                <div class="attempt-box">
+                    <div>
+                        <span class="muted">FAILED ATTEMPTS</span>
+                        <div class="attempt-count">
+                            <span id="attemptCount">0</span>
+                            <span class="muted"> / 5</span>
+                        </div>
+                    </div>
+                    <span id="lockStatus" class="status-pill">UNLOCKED</span>
+                </div>
+
+                <div class="attempt-track" id="attemptTrack">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+
+                <p id="loginMessage" class="login-message" aria-live="polite">
+                    The simulator is ready.
+                </p>
+
+                <div class="button-row">
+                    <button id="failedLoginBtn" class="primary-btn" type="button">
+                        Simulate failed login
+                    </button>
+                    <button id="resetBtn" class="secondary-btn" type="button">
+                        Reset
+                    </button>
+                </div>
+
+                <p class="fine-print">
+                    This is a browser simulation, not real authentication
+                    or server-side account protection.
+                </p>
+            </article>
+        </section>
+
+        <section class="panel section-gap">
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">03 / SECURITY SUMMARY</p>
+                    <h2>Audit report</h2>
+                </div>
+                <span class="number">03</span>
+            </div>
+
+            <p class="panel-description">
+                Download a summary of your latest audit and login simulation.
+                The report does not contain the tested password.
+            </p>
+
+            <div id="reportSummary" class="report-summary">
+                <span class="report-dot"></span>
+                No audit has been run yet.
+            </div>
+
+            <button id="downloadReportBtn" class="secondary-btn" type="button">
+                ↓ Download security report
+            </button>
+        </section>
+
+        <section class="panel section-gap">
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">04 / AUTOMATED TESTING</p>
+                    <h2>Self-test lab</h2>
+                </div>
+                <span class="number">04</span>
+            </div>
+
+            <p class="panel-description">
+                Run repeatable checks on password policy rules and
+                simulated account lockout.
+            </p>
+
+            <button id="runTestsBtn" class="primary-btn" type="button">
+                Run all self-tests →
+            </button>
+
+            <div id="testResults" class="result" aria-live="polite">
+                <p class="muted">Tests have not been run yet.</p>
+            </div>
+        </section>
+
+        <section class="panel section-gap" id="threatLab">
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">05 / THREAT RADAR</p>
+                    <h2>Security attack simulator</h2>
+                </div>
+                <span class="number">05</span>
+            </div>
+
+            <p class="panel-description">
+                Watch simulated failed-login events raise the threat level
+                and activate the lockout defense.
+            </p>
+
+            <div class="attempt-box">
+                <div>
+                    <span class="muted">CURRENT THREAT LEVEL</span>
+                    <div id="threatLevel" class="threat-level">LOW</div>
+                </div>
+                <span id="threatBadge" class="status-pill">MONITORING</span>
+            </div>
+
+            <p id="threatExplanation" class="login-message" aria-live="polite">
+                No suspicious activity in this simulation.
+            </p>
+
+            <div class="button-row">
+                <button id="runScenarioBtn" class="primary-btn" type="button">
+                    ▶ Run attack scenario
+                </button>
+                <button id="clearEventsBtn" class="secondary-btn" type="button">
+                    Clear event log
+                </button>
+            </div>
+
+            <h3 class="log-heading">SIMULATED EVENT LOG</h3>
+            <div id="threatLog" class="threat-log" aria-live="polite">
+                <p class="muted">Waiting for simulated events...</p>
+            </div>
+
+            <p class="fine-print">
+                All events are simulated locally. No real account or external
+                system is targeted.
+            </p>
+        </section>
+
+        <footer>
+            <span>AUTHGUARD / CYBERSECURITY MINI PROJECT</span>
+            <span>Client-side educational demo</span>
+        </footer>
+    </main>
+    
+<!-- AuthGuard: Adaptive Login Risk Engine -->
+<section class="risk-engine" id="riskEngine">
+  <div class="risk-header">
+    <div>
+      <p class="risk-eyebrow">AUTHGUARD SECURITY MODULE</p>
+      <h2>Adaptive Login Risk Engine</h2>
+      <p>Analyze a simulated login session and understand its risk.</p>
+    </div>
+    <span class="risk-demo-badge">SIMULATION</span>
+  </div>
+
+  <div class="risk-form">
+    <label for="riskFailedAttempts">Failed login attempts</label>
+    <select id="riskFailedAttempts">
+      <option value="0">0 attempts</option>
+      <option value="1">1 attempt</option>
+      <option value="2">2 attempts</option>
+      <option value="3">3 attempts</option>
+      <option value="4">4 attempts</option>
+      <option value="5">5 or more attempts</option>
+    </select>
+
+    <label class="risk-option">
+      <input type="checkbox" id="riskUnknownDevice">
+      <span>
+        <strong>Unrecognized device</strong>
+        <small>The device is not recognized by this simulation.</small>
+      </span>
+    </label>
+
+    <label class="risk-option">
+      <input type="checkbox" id="riskUnusualLocation">
+      <span>
+        <strong>Unusual login location</strong>
+        <small>The login location differs from the expected location.</small>
+      </span>
+    </label>
+
+    <label class="risk-option">
+      <input type="checkbox" id="riskNewBrowser">
+      <span>
+        <strong>New browser detected</strong>
+        <small>The browser has not been seen in this simulation.</small>
+      </span>
+    </label>
+
+    <button type="button" id="analyzeRiskBtn" class="risk-analyze-btn">
+      Analyze Login
+    </button>
+  </div>
+
+  <div class="risk-results" id="riskResults" aria-live="polite">
+    <div class="risk-empty">
+      <span>◈</span>
+      <h3>Awaiting analysis</h3>
+      <p>Choose a scenario and analyze the simulated login.</p>
+    </div>
+  </div>
+
+  <p class="risk-disclaimer">
+    Educational simulation only. These indicators are illustrative,
+    not proof of an attack or a real authentication decision.
+  </p>
+</section>
+
+</body>
+</html>
